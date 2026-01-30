@@ -92,6 +92,7 @@ test.describe('Negative Functional Tests – Singlish to Sinhala', () => {
     await expect(page.locator('body')).not.toContainText('ඔමම ඉගෙන ගන්නවා');
   });
 
+
       test('NEG_FUN_0010 - Typographical error in Singlish input', async ({ page }) => {
     await page.goto('https://www.swifttranslator.com/', { timeout: 60000 });
 
@@ -101,5 +102,39 @@ test.describe('Negative Functional Tests – Singlish to Sinhala', () => {
 
     await expect(page.locator('body')).not.toContainText('මම රට යනවා');
   });
+
+
+        test('NEG_UI_0001 - No UI guidance showing Singlish-to-Sinhala letter mappings', async ({ page }) => {
+    await page.goto('https://www.swifttranslator.com/', { timeout: 60000 });
+
+    await page.fill('textarea', 'nae');
+
+    await page.waitForTimeout(3000);
+
+    await expect(page.locator('body')).not.toContainText('නැ');
+  });
+  
+        test('NEG_UI_0002 - Verify Clear button functionality', async ({ page }) => {
+    await page.goto('https://www.swifttranslator.com/', { timeout: 60000 });
+
+    await page.fill('textarea', 'mama heta office yanna inne namuth traffic hari vaedi. ehema unoth mama poddak parakku venna puluvan kiyala hithenavaa. enisaa mata kalinma yanna oone kiyala hithunaa.mama heta office yanna inne namuth traffic hari vaedi. ehema unoth mama poddak parakku venna puluvan kiyala hithenavaa. enisaa mata kalinma yanna oone kiyala hithunaa.mama heta office yanna inne namuth traffic hari vaedi. ehema unoth mama poddak parakku venna puluvan kiyala hithenavaa. enisaa mata kalinma yanna oone kiyala hithunaa.mama heta office yanna inne namuth traffic hari vaedi. ');
+
+    await page.waitForTimeout(3000);
+
+    await expect(page.locator('body')).not.toContainText('මම ගමේ යනවාමම හෙට ඔෆිස් යන්න ඉන්නේ නමුත් ට්‍රැෆික් හරි වැඩි. එහෙම උනොත් මම පොඩ්ඩක් පරක්කු වෙන්න පුලුවන් කියල හිතෙනවා. එනිසා මට කලින්ම යන්න ඕනෙ කියල හිතුනා.මම හෙට ඔෆිස් යන්න ඉන්නේ නමුත් ට්‍රැෆික් හරි වැඩි. එහෙම උනොත් මම පොඩ්ඩක් පරක්කු වෙන්න පුලුවන් කියල හිතෙනවා. එනිසා මට කලින්ම යන්න ඕනෙ කියල හිතුනා.මම හෙට ඔෆිස් යන්න ඉන්නේ නමුත් ට්‍රැෆික් හරි වැඩි. එහෙම උනොත් මම පොඩ්ඩක් පරක්කු වෙන්න පුලුවන් කියල හිතෙනවා. එනිසා මට කලින්ම යන්න ඕනෙ කියල හිතුනා.මම හෙට ඔෆිස් යන්න ඉන්නේ නමුත් ට්‍රැෆික් හරි වැඩි. ');
+  });
+
+  
+        test('NEG_UI_0003 - Verify behavior on empty input submission', async ({ page }) => {
+    await page.goto('https://www.swifttranslator.com/', { timeout: 60000 });
+
+    await page.fill('textarea', ' ');
+
+    await page.waitForTimeout(3000);
+
+    await expect(page.locator('body')).not.toContainText(' ');
+  });
+
+  
 
 });
