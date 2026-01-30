@@ -1,12 +1,23 @@
-# Assignment 1 – Playwright Tests
+# Playwright Test Automation Project
 
-## Project Description
-This project contains Playwright automated tests for the SwiftTranslator application as part of Assignment 1.
+This repository contains automated test cases developed using Playwright
+to test the Singlish to Sinhala translation functionality of
+https://www.swifttranslator.com/.
+
 
 ## Prerequisites
-- Node.js (LTS)
-- npm
 
-## Setup Instructions
+The following software must be installed before running the project:
+
+- Node.js (LTS version)
+- npm (included with Node.js)
+- Git
+
+
+## Installing Dependencies
+
+After cloning the repository, open a terminal in the project root folder
+and run the following command to install all required dependencies:
+
 ```bash
 npm install
