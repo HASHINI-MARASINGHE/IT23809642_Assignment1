@@ -1,23 +1,32 @@
-# Playwright Test Automation Project
+# Assignment 1 – Playwright Automation Tests
 
-This repository contains automated test cases developed using Playwright
-to test the Singlish to Sinhala translation functionality of
-https://www.swifttranslator.com/.
+## Student ID
+IT23809642
 
+## Project Description
+This project contains automated end-to-end test cases for the
+SwiftTranslator (Singlish to Sinhala) web application using Playwright.
 
-## Prerequisites
+## Tools & Technologies
+- Playwright
+- JavaScript
+- Node.js
+- VS Code
 
-The following software must be installed before running the project:
+## Project Structure
+- tests/
+  - translator-positive.spec.js
+  - translator-negative.spec.js
+- playwright.config.js
+- package.json
+- README.md
 
-- Node.js (LTS version)
-- npm (included with Node.js)
-- Git
+## How to Run Tests
+1. Open terminal in project folder
+2. Run:
+   npx playwright test
 
-
-## Installing Dependencies
-
-After cloning the repository, open a terminal in the project root folder
-and run the following command to install all required dependencies:
-
-```bash
-npm install
+## Test Coverage
+- Positive Functional Test Cases
+- Negative Functional Test Cases
+- Expected Pass and Expected Fail scenarios included
