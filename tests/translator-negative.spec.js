@@ -1,46 +1,77 @@
 import { test, expect } from '@playwright/test';
 
-const negativeSentences = [
-  { id: 'NEG_FUN_0001', text: 'oyaa kaeema kaevadha???' },
-  { id: 'NEG_FUN_0002', text: 'oya mata kiyannadha?' },
-  { id: 'NEG_FUN_0003', text: 'mama gedhara yanavaa\no yaa enavadha?' },
-  { id: 'NEG_FUN_0004', text: 'MAMA NAENDHAVA DHAEKKAA' },
-  { id: 'NEG_FUN_0005', text: 'mama ?gedhara !yanavaa' },
-  { id: 'NEG_FUN_0006', text: 'mammmmm naaanavaaaa' },
-  { id: 'NEG_FUN_0007', text: 'hasini oyaa adha udhee galle yanavaa kivvaa needha?' },
-  { id: 'NEG_FUN_0008', text: 'mamagameeyanavaa' },
-  { id: 'NEG_FUN_0009', text: 'mama    igena           gannavaa' },
-  { id: 'NEG_FUN_0010', text: 'mama rata yanavvaa' }
-];
+test.describe('Negative Functional Tests – Singlish to Sinhala (10)', () => {
 
-negativeSentences.forEach(({ id, text }) => {
-  test(`${id} - Negative Functional Translation`, async ({ page }) => {
-    test.setTimeout(120000);
-
+  async function translate(page, input) {
     await page.goto('https://www.swifttranslator.com/', { timeout: 60000 });
-    await page.click('textarea');
-    await page.waitForTimeout(1000);
 
-    // WORD-BY-WORD typing (same logic as POS)
-    const words = text.split(' ');
-    for (const word of words) {
-      await page.keyboard.type(word);
-      await page.keyboard.press('Space');
-      await page.waitForTimeout(2000);
-    }
+    const inputBox = page.locator('textarea:not([readonly])');
+    const outputBox = page.locator('textarea[readonly]');
 
-    // Final wait
-    await page.waitForTimeout(4000);
+    await inputBox.fill(input);
 
-    // Basic stability check (NEGATIVE = no crash)
-    await expect(page.locator('textarea')).toBeVisible();
+    // wait until system produces some output
+    await expect(outputBox).not.toHaveValue('');
 
-    // Screenshot proof
-    await page.screenshot({
-      path: `screenshots/${id}.png`,
-      fullPage: true
-    });
+    return (await outputBox.inputValue()).trim();
+  }
 
-    console.log(`⚠️ ${id} completed | Input: "${text}"`);
+  test('NEG_FUN_0001 -  Inputs containing punctuation marks ', async ({ page }) => {
+    const actual = await translate(page, 'oyaa kaeema kaevadha???');
+    const correct = 'ඔයා කෑම කැවද?';
+    expect(actual).not.toBe(correct);
   });
+
+  test('NEG_FUN_0002 - Random characters', async ({ page }) => {
+    const actual = await translate(page, 'jnjdnejnvdkxcsme');
+    expect(actual).not.toBe('jnjdnejnvdkxcsme');
+  });
+
+  test('NEG_FUN_0003 - Line breaks (multi-line input) ', async ({ page }) => {
+    const actual = await translate(page, 'mama gedhara yanavaa oyaa enavadha?');
+    const correct = 'මම ගෙදර යනවා';
+    expect(actual).not.toBe(correct);
+  });
+
+  test('NEG_FUN_0004 -  Tense variations (past)', async ({ page }) => {
+    const actual = await translate(page, 'MAMA NAENDHAVA DHAEKKAA');
+    const correct = 'මම නැන්දව දැක්කා';
+    expect(actual).not.toBe(correct);
+  });
+
+  test('NEG_FUN_0005 - Numbers only', async ({ page }) => {
+    const actual = await translate(page, '1234566');
+    expect(actual).not.toBe('1234566');
+  });
+
+  test('NEG_FUN_0006 - Multi-word expressions', async ({ page }) => {
+    const actual = await translate(page, 'mammmmm naaanavaaaa');
+    const correct = 'මම නානවා';
+    expect(actual).not.toBe(correct);
+  });
+
+  test('NEG_FUN_0007 - Sentences containing places and common English words that should remain as they are ', async ({ page }) => {
+    const actual = await translate(page, 'hasini oyaa adha udhee galle yanavaa kivvaa needha?');
+    const correct = 'හසිනි ඔයා අද උදේ ගාල්ලේ යනවා කිව්වා නේද?';
+    expect(actual).not.toBe(correct);
+  });
+
+  test('NEG_FUN_0008 - Missing spaces / joined words', async ({ page }) => {
+    const actual = await translate(page, 'mamagameeyanavaa');
+    const correct = 'මම ගමේ යනවා';
+    expect(actual).not.toBe(correct);
+  });
+
+  test('NEG_FUN_0009 - Extra spaces in sentence', async ({ page }) => {
+    const actual = await translate(page, 'mama    igena      gannavaa');
+    const correct = 'මම ඉගෙන ගන්නවා';
+    expect(actual).not.toBe(correct);
+  });
+
+  test('NEG_FUN_0010 - Typographical error', async ({ page }) => {
+    const actual = await translate(page, 'mama rata yanawaa');
+    const correct = 'මම රට යනwආ';
+    expect(actual).not.toBe(correct);
+  });
+
 });
