@@ -203,14 +203,6 @@ These test cases verify that the system handles invalid or edge-case inputs appr
 
 # Positive UI Test Cases (4)
 1. Pos_UI_0001: Tense variations (future) 
-2. Pos_UI_0002: Tense variations (future) 
-3. Pos_UI_0003: Paste medium text input, Time formats, and  Sentences containing places and                   common English words that should remain as they are
-4. Pos_UI_0004: Negative sentence forms 
-
-# Negative UI Test Cases (4)
-1. Neg_UI_0001: No UI guidance showing Singlish-to-Sinhala letter mappings
-2. Neg_UI_0002: Verify Clear button functionality
-3. Neg_UI_0003: Verify behavior on empty input submission
 
 ## 🔧 Configuration
 - Playwright Configuration
