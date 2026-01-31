@@ -62,11 +62,6 @@ Step 2: Install Dependencies
 ```bash
 npm install
 ```
-Step 3: Install Playwright Browsers
-
-# Install required browsers (Chromium)
-```bash
-npx playwright install chromium
 ```
 
 # 🚀 Running the Tests
@@ -78,6 +73,12 @@ npx playwright test --project=chromium $ --headed
 
 ```
 Option 2: Run Specific Test Suites
+
+# Run all test cases
+```bash
+npx playwright test  --project=chromium $ --headed
+
+```
 
 # Run only positive test cases
 ```bash
