@@ -182,13 +182,13 @@ These test cases verify that the system handles invalid or edge-case inputs appr
 
 1. Neg_Fun_0001: Inputs containing punctuation marks 
 
-2. Neg_Fun_0002: Interrogative (questions) forms 
+2. Neg_Fun_0002: Random characters
 
 3. Neg_Fun_0003: Tense variations (past)
 
 4. Neg_Fun_0004: Handle heavy spelling errors
 
-5. Neg_Fun_0005: Inputs containing punctuation marks
+5. Neg_Fun_0005: Numbers 
 
 6. Neg_Fun_0006: Multi-word expressions
 
@@ -198,7 +198,7 @@ These test cases verify that the system handles invalid or edge-case inputs appr
 
 9. Neg_Fun_0009: Multiple spaces in Singlish input
 
-10. Neg_Fun_0010: Typographical error in Singlish input
+10. Neg_Fun_0010: Convert interrogative sentence with spelling ambiguity
 
 # Positive UI Test Cases (4)
 1. Pos_UI_0001: Tense variations (future) 
